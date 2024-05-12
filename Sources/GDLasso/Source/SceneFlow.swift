@@ -7,6 +7,5 @@
 //
 
 import Foundation
-import SwiftGodot
 
 public protocol SceneFlow {}
