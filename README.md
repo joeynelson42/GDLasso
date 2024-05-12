@@ -14,8 +14,8 @@ The real power comes from composition. `Flows` are the "glue code" that manage m
 As an example:
 1. The `EnvironmentNode` notices a Node3D has walked into a patch of lava.
 2. It communicates this to its store, `EnvironmentStore`.
-3. `EnvironmentStore` checks if it's a `PlayerNode`, if it is then it dispatches `Output` to the `Flow`, notifying it that the player has stepped into lava.
-4. The `Flow` informs the `PlayerStore` that the player has taken damage.
+3. `EnvironmentStore` then it dispatches `Output` to the `Flow`, notifying it that something has stepped into lava.
+4. The `Flow` checks if it was the player, and if so it informs the `PlayerStore` that the player has taken damage from lava.
 5. The `PlayerStore` applies damage to the player by reducing the `Health` value in its `State`.
 
 ### Seems...overly complicated
