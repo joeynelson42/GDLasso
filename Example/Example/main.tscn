@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1hh7mjc35f32"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_x5a4c"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_metvj"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.353553, 0.612372, 3.02058e-16, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 1.8, 1.44855, 1.8)
+projection = 1
+current = true
+size = 2.5
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.623857, -0.5782, 0.525821, 0.442108, 0.815895, 0.372633, -0.644471, -1.59863e-09, 0.764629, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_x5a4c")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_metvj")
