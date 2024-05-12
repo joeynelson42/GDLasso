@@ -12,7 +12,8 @@ import SwiftGodot
 struct PlayerModule: SceneModule {
     
     struct State {
-        var isDead: Bool = false
+        var health: Int = 100
+        var isDead: Bool { return health <= 0 }
     }
     
     enum InternalAction {
@@ -20,7 +21,7 @@ struct PlayerModule: SceneModule {
     }
     
     enum ExternalAction {
-        
+        case damageCausedToPlayer(amount: Int)
     }
     
     enum Output {

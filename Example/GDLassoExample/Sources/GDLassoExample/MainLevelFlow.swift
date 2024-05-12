@@ -20,12 +20,20 @@ class MainLevelFlow: Node3D, SceneFlow {
     override func _ready() {
         if var playerController {
             playerController.set(store: playerStore.asNodeStore())
-            GD.print("Set PlayerController store.")
         }
         
         if var environmentController {
             environmentController.set(store: environmentStore.asNodeStore())
-            GD.print("Set EnvironmentController store.")
+            environmentStore.observeOutput(handleEnvironmentOutput(_:))
+        }
+    }
+    
+    private func handleEnvironmentOutput(_ output: GDLassoStore<EnvironmentModule>.Output) {
+        switch output {
+        case .damageCausedToEntity(let entity, let damage):
+            if let playerController, playerController == entity {
+                playerStore.dispatchExternalAction(.damageCausedToPlayer(amount: damage))
+            }
         }
     }
 }

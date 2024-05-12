@@ -5,6 +5,7 @@
 //  Created by Joey Nelson on 5/12/24.
 //
 
+import Combine
 import Foundation
 import GDLasso
 import SwiftGodot
@@ -21,19 +22,16 @@ class EnvironmentController: Node3D, SceneNode {
     }
     
     private func initializeAreaMonitoring() {
-        GD.print("initializeAreaMonitoring attempting...")
         guard let dangerZoneArea else { return }
         
         dangerZoneArea.bodyEntered.connect { [weak self] body in
             guard let self else { return }
-            store?.dispatchAction(.entityEnteredDangerZone(entity: body))
+            dispatchInternalAction(.entityEnteredDangerZone(entity: body))
         }
         
         dangerZoneArea.bodyExited.connect { [weak self] body in
             guard let self else { return }
-            store?.dispatchAction(.entityExitedDangerZone(entity: body))
+            dispatchInternalAction(.entityExitedDangerZone(entity: body))
         }
-        
-        GD.print("initializeAreaMonitoring success")
     }
 }

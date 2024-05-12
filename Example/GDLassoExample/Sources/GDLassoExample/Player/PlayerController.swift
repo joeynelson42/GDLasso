@@ -32,16 +32,19 @@ class PlayerController: CharacterBody3D, SceneNode {
         let collision = moveAndCollide(motion: velocity * delta)
         
         if let collision {
-            dispatchAction(.didCollideWithCollider(collision))
+            dispatchInternalAction(.didCollideWithCollider(collision))
         }
     }
     
     func setUpObservations() {
         guard let store else { return }
         
-        store.observeState(\.isDead) { isDead in
-            if isDead {
-                GD.print("player died")
+        store.observeState(\.health) { [weak self] health in
+            guard let self, let state = self.state else { return }
+            if state.isDead {
+                GD.print("Player died.")
+            } else {
+                GD.print("Player health changed to \(health).")
             }
         }
     }

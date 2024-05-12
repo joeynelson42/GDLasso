@@ -19,7 +19,10 @@ class PlayerStore: GDLassoStore<PlayerModule> {
     }
     
     override func handleAction(_ externalAction: GDLassoStore<PlayerModule>.ExternalAction) {
-        
+        switch externalAction {
+        case .damageCausedToPlayer(let amount):
+            update { $0.health = max($0.health - amount, 0) }
+        }
     }
     
 }

@@ -13,6 +13,8 @@ struct EnvironmentModule: SceneModule {
     
     struct State {
         var entitiesInDangerZone: [Node3D] = []
+        
+        var dangerZoneDamage: Int = 10
     }
     
     enum InternalAction {
@@ -25,7 +27,7 @@ struct EnvironmentModule: SceneModule {
     }
     
     enum Output {
-        case damageCausedToEntity(entity: Object, damage: Int)
+        case damageCausedToEntity(entity: Node3D, damage: Int)
     }
     
 }
