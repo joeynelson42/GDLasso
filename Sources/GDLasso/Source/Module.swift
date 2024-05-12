@@ -35,8 +35,8 @@ public protocol SceneModule {
     /// The primary, type-erased, public access `Store` for the module.
     typealias Store = AnyStore<State, InternalAction, ExternalAction, Output>
     
-    /// The `ViewStore` is a type-erased lens into the `Store`, that hides the `Output`.
-    /// The `ViewStore` is typically used as the interface the view controller sees.
+    /// The `NodeStore` is a type-erased lens into the `Store`, that hides the `Output`.
+    /// The `NodeStore` is typically used as the interface the view controller sees.
     typealias NodeStore = AnyNodeStore<State, InternalAction>
     
 }

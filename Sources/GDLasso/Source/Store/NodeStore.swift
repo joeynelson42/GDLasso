@@ -22,7 +22,7 @@ public protocol AbstractNodeStore: StateObservable, InternalActionDispatchable {
 /// - readable, observable state
 public class AnyNodeStore<NodeState, NodeAction>: AbstractNodeStore {
 
-    /// Create a `ViewStore`
+    /// Create a `NodeStore`
     ///
     /// - Parameters:
     ///   - store: the concrete, source store
@@ -44,7 +44,7 @@ public class AnyNodeStore<NodeState, NodeAction>: AbstractNodeStore {
         }
     }
     
-    /// Create a `ViewStore` where the `NodeAction` is `NoAction`.
+    /// Create a `NodeStore` where the `NodeAction` is `NoAction`.
     ///
     /// - Parameters:
     ///   - store: the concrete, source store
@@ -120,49 +120,49 @@ extension AbstractNodeStore {
     public typealias ActionMap<A> = (A) -> InternalAction
     public typealias StateMap<S> = (State) -> S
     
-    /// Create a ViewStore with a NodeState that can be initialized from the Store's State,
+    /// Create a NodeStore with a NodeState that can be initialized from the Store's State,
     /// using a NodeModule to define the relevant NodeState & NodeAction types.
     ///
     /// - Parameters:
     ///   - NodeModuleType: the NodeModule that defines the target NodeState
     ///   - stateMap: a closure that converts the Store's State to the NodeState
-    /// - Returns: a new ViewStore
-    public func asViewStore<Module: NodeModule>(
+    /// - Returns: a new NodeStore
+    public func asNodeStore<Module: NodeModule>(
         for NodeModuleType: Module.Type,
         stateMap: @escaping StateMap<Module.NodeState>
     ) -> AnyNodeStore<Module.NodeState, Module.NodeAction> where Module.NodeAction == InternalAction {
-        asViewStore(stateMap: stateMap, actionMap: { $0 })
+        asNodeStore(stateMap: stateMap, actionMap: { $0 })
     }
     
-    /// Create a `ViewStore` with a `NodeState` that can be initialized from the Store's State,
+    /// Create a `NodeStore` with a `NodeState` that can be initialized from the Store's State,
     /// using a `NodeModule` whose `NodeAction` is `NoAction` to define the relevant `NodeState` type.
     ///
     /// - Parameters:
     ///   - NodeModuleType: the NodeModule that defines the target NodeState
     ///   - stateMap: a closure that converts the Store's State to the NodeState
-    /// - Returns: a new ViewStore
-    public func asViewStore<Module: NodeModule>(
+    /// - Returns: a new NodeStore
+    public func asNodeStore<Module: NodeModule>(
         for NodeModuleType: Module.Type,
         stateMap: @escaping StateMap<Module.NodeState>
     ) -> AnyNodeStore<Module.NodeState, NoAction> where Module.NodeAction == NoAction {
         AnyNodeStore<Module.NodeState, NoAction>(self, stateMap: stateMap)
     }
     
-    /// Create a `ViewStore` using a subset of actions, with the Store's `State` type,
+    /// Create a `NodeStore` using a subset of actions, with the Store's `State` type,
     /// using a `NodeModule` to define the relevant `NodeState` & `NodeAction` types.
     ///
     /// - Parameters:
     ///   - NodeModuleType: the NodeModule that defines the target NodeAction
     ///   - actionMap: a closure that maps the View's actions to the Store's actions
-    /// - Returns: a new ViewStore
-    public func asViewStore<Module: NodeModule>(
+    /// - Returns: a new NodeStore
+    public func asNodeStore<Module: NodeModule>(
         for NodeModuleType: Module.Type,
         actionMap: @escaping ActionMap<Module.NodeAction>
     ) -> AnyNodeStore<Module.NodeState, Module.NodeAction> where Module.NodeState == State {
-        asViewStore(stateMap: { $0 }, actionMap: actionMap)
+        asNodeStore(stateMap: { $0 }, actionMap: actionMap)
     }
     
-    /// Create a `ViewStore` using a subset of actions,
+    /// Create a `NodeStore` using a subset of actions,
     /// with a `NodeState` that can be initialized from the Store's `State`,
     /// using a `NodeModule` to define the relevant `NodeState` & `NodeAction` types.
     ///
@@ -170,51 +170,51 @@ extension AbstractNodeStore {
     ///   - NodeModuleType: the NodeModule that defines the target NodeState and NodeAction
     ///   - stateMap: a closure that converts the Store's State to the NodeState
     ///   - actionMap: a closure that maps the View's actions to the Store's actions
-    /// - Returns: a new ViewStore
-    public func asViewStore<Module: NodeModule>(
+    /// - Returns: a new NodeStore
+    public func asNodeStore<Module: NodeModule>(
         for NodeModuleType: Module.Type,
         stateMap: @escaping StateMap<Module.NodeState>,
         actionMap: @escaping ActionMap<Module.NodeAction>
     ) -> AnyNodeStore<Module.NodeState, Module.NodeAction> {
-        asViewStore(stateMap: stateMap, actionMap: actionMap)
+        asNodeStore(stateMap: stateMap, actionMap: actionMap)
     }
     
-    /// Create a `ViewStore` using the Store's `State` and `Action` types,
+    /// Create a `NodeStore` using the Store's `State` and `Action` types,
     /// that provides access to just the `dispatchAction` and `observeState` methods.
     ///
-    /// - Returns: a new ViewStore
-    public func asViewStore() -> AnyNodeStore<State, InternalAction> {
-        asViewStore(stateMap: { $0 }, actionMap: { $0 })
+    /// - Returns: a new NodeStore
+    public func asNodeStore() -> AnyNodeStore<State, InternalAction> {
+        asNodeStore(stateMap: { $0 }, actionMap: { $0 })
     }
     
-    /// Create a `ViewStore` with a `NodeState` that can be initialized from the Store's `State`.
+    /// Create a `NodeStore` with a `NodeState` that can be initialized from the Store's `State`.
     ///
     /// - Parameter stateMap: a closure that maps the View's actions to the Store's actions
-    /// - Returns: a new ViewStore
-    public func asViewStore<NodeState>(
+    /// - Returns: a new NodeStore
+    public func asNodeStore<NodeState>(
         stateMap: @escaping StateMap<NodeState>
     ) -> AnyNodeStore<NodeState, InternalAction> {
-        asViewStore(stateMap: stateMap, actionMap: { $0 })
+        asNodeStore(stateMap: stateMap, actionMap: { $0 })
     }
     
-    /// Create a `ViewStore` using a subset of actions, with the Store's `State` type.
+    /// Create a `NodeStore` using a subset of actions, with the Store's `State` type.
     ///
     /// - Parameter actionMap: a closure that maps the View's actions to the Store's actions
-    /// - Returns: a new ViewStore
-    public func asViewStore<NodeAction>(
+    /// - Returns: a new NodeStore
+    public func asNodeStore<NodeAction>(
         actionMap: @escaping ActionMap<NodeAction>
     ) -> AnyNodeStore<State, NodeAction> {
-        asViewStore(stateMap: { $0 }, actionMap: actionMap)
+        asNodeStore(stateMap: { $0 }, actionMap: actionMap)
     }
     
-    /// Create a `ViewStore` using a subset of actions,
+    /// Create a `NodeStore` using a subset of actions,
     /// with a `NodeState` that can be initialized from the Store's `State`.
     ///
     /// - Parameters:
     ///   - actionMap: a closure that maps the View's actions to the Store's actions
     ///   - stateMap: a closure that converts the Store's State to the NodeState
-    /// - Returns: a new ViewStore
-    public func asViewStore<NodeState, NodeAction>(
+    /// - Returns: a new NodeStore
+    public func asNodeStore<NodeState, NodeAction>(
         stateMap: @escaping StateMap<NodeState>,
         actionMap: @escaping ActionMap<NodeAction>
     ) -> AnyNodeStore<NodeState, NodeAction> {
