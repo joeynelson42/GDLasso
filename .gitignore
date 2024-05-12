@@ -15,3 +15,7 @@ data_*/
 mono_crash.*.json
 
 .DS_Store
+.swiftpm/
+.swiftpm/config/registries.json
+.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
+Example/GDLassoExample/.swiftpm/
