@@ -12,7 +12,7 @@
 
 import Foundation
 
-public protocol AbstractStore: AbstractNodeStore, OutputObservable { }
+public protocol AbstractStore: AbstractNodeStore, OutputObservable, ExternalActionDispatchable { }
 
 public protocol ConcreteStore: AbstractStore {
     init(with initialState: State)

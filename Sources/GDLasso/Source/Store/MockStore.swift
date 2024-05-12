@@ -18,7 +18,9 @@ public final class MockGDLassoStore<Module: SceneModule>: ConcreteStore {
     public typealias ExternalAction = Module.ExternalAction
     public typealias Output = Module.Output
     
-    public var dispatchedActions = [InternalAction]()
+    public var dispatchedInternalActions = [InternalAction]()
+    
+    public var dispatchedExternalActions = [ExternalAction]()
     
     private let binder: ValueBinder<State>
     
@@ -59,7 +61,11 @@ public final class MockGDLassoStore<Module: SceneModule>: ConcreteStore {
     
     // actions
     public func dispatchAction(_ internalAction: Module.InternalAction) {
-        dispatchedActions.append(internalAction)
+        dispatchedInternalActions.append(internalAction)
+    }
+    
+    public func dispatchAction(_ externalAction: Module.ExternalAction) {
+        dispatchedExternalActions.append(externalAction)
     }
     
     // outputs
