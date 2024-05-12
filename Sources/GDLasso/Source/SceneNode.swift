@@ -18,7 +18,7 @@ public protocol SceneNode {
     
     var store: NodeStore? { get set }
     
-    func set(store: NodeStore)
+    mutating func set(store: NodeStore)
     
     func setUpObservations()
     
