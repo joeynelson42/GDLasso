@@ -16,19 +16,19 @@ public protocol SceneNode {
     
     typealias NodeStore = AnyNodeStore<NodeState, NodeAction>
     
-    var store: NodeStore { get }
+    var store: NodeStore? { get }
     
     func set(store: NodeStore)
 }
 
 extension SceneNode {
     
-    public var state: NodeState {
-        return store.state
+    public var state: NodeState? {
+        return store?.state
     }
     
     public func dispatchAction(_ action: NodeAction) {
-        store.dispatchAction(action)
+        store?.dispatchAction(action)
     }
     
 }
