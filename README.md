@@ -32,3 +32,10 @@ By creating discrete, single-responsibility entities we can:
 1. Create a Swift GDExtension using SwiftGodot
 2. Add GDLasso as a dependency of your Swift GDExtension
 3. Build your extension using the GDLasso pattern.
+
+## Roadmap
+I am currently using GDLasso to build [Riposte](https://github.com/joeynelson42/riposte). As I make progress there I will make improvements to GDLasso. The core concepts won't change, but APIs might be unstable for a while.
+
+Things I'd like to see improved:
+1. Flows, currently they're nothing more than an empty protocol. All "glue" functionality is totally custom.
+2. More opinionated usage instructions.
