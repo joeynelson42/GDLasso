@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol SceneNode: AnyObject {
+public protocol SceneNode {
     
     associatedtype NodeState
     
@@ -26,7 +26,7 @@ public protocol SceneNode: AnyObject {
 
 extension SceneNode {
     
-    public func set(store: NodeStore) {
+    public mutating func set(store: NodeStore) {
         self.store = store
         setUpObservations()
     }
