@@ -1,19 +1,33 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1hh7mjc35f32"]
+[gd_scene load_steps=8 format=3 uid="uid://b1hh7mjc35f32"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ljdot"]
+albedo_color = Color(0.105882, 0.454902, 0.282353, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_x5a4c"]
+material = SubResource("StandardMaterial3D_ljdot")
+size = Vector3(10, 0.1, 10)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_metvj"]
+size = Vector3(10, 0.1, 10)
 
-[node name="Node3D" type="Node3D"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cfttt"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_q2ji4"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_swac8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t4yr0"]
+
+[node name="Node3D" type="MainLevelFlow"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.707107, -0.353553, 0.612372, 3.02058e-16, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 1.8, 1.44855, 1.8)
+transform = Transform3D(0.707107, 0.353553, -0.612373, 3.02058e-16, 0.866026, 0.499999, 0.707107, -0.353553, 0.612373, -5, 4.662, 5)
 projection = 1
 current = true
-size = 2.5
+size = 10.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.623857, -0.5782, 0.525821, 0.442108, 0.815895, 0.372633, -0.644471, -1.59863e-09, 0.764629, 0, 0, 0)
+transform = Transform3D(0.623857, -0.5782, 0.525821, 0.442108, 0.815895, 0.372633, -0.644471, -4.12367e-07, 0.764629, 0, 0, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
@@ -22,3 +36,21 @@ mesh = SubResource("BoxMesh_x5a4c")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_metvj")
+
+[node name="PlayerController" type="PlayerController" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08024, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerController"]
+shape = SubResource("CapsuleShape3D_cfttt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerController"]
+mesh = SubResource("CapsuleMesh_q2ji4")
+
+[node name="CollisionExample" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.47795, 0.741963, -2.54678)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionExample"]
+mesh = SubResource("BoxMesh_swac8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionExample"]
+shape = SubResource("BoxShape3D_t4yr0")

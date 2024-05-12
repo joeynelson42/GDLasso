@@ -12,7 +12,7 @@ import SwiftGodot
 struct PlayerModule: SceneModule {
     
     struct State {
-        
+        var isDead: Bool = false
     }
     
     enum InternalAction {

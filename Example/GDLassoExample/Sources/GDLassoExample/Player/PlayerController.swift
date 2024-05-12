@@ -38,16 +38,17 @@ class PlayerController: CharacterBody3D, SceneNode {
         let collision = moveAndCollide(motion: velocity * delta)
         
         if let collision {
-            
+            store?.dispatchAction(.didCollideWithCollider(collision))
         }
     }
     
     private func setUpObservations() {
         guard let store else { return }
         
-//        store.observeState(\.clickedNode) { old, node in
-//            guard let node else { return }
-//            GD.print("Observed that \(node) was clicked.")
-//        }
+        store.observeState(\.isDead) { isDead in
+            if isDead {
+                GD.print("player died")
+            }
+        }
     }
 }

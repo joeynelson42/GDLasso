@@ -7,13 +7,14 @@
 
 import Foundation
 import GDLasso
+import SwiftGodot
 
 class PlayerStore: GDLassoStore<PlayerModule> {
     
     override func handleAction(_ internalaAction: GDLassoStore<PlayerModule>.InternalAction) {
         switch internalaAction {
         case .didCollideWithCollider(let collision):
-            break
+            GD.print(collision.getPosition())
         }
     }
     
