@@ -13,6 +13,7 @@ swift build --configuration debug
 cd ..
 
 echo "Copying Extension"
+cp GDLassoExample/.build/arm64-apple-macosx/debug/libGDLasso.dylib Example/bin/libGDLasso.dylib
 cp GDLassoExample/.build/arm64-apple-macosx/debug/libGDLassoExample.dylib Example/bin/libGDLassoExample.dylib
 
 sleep .5

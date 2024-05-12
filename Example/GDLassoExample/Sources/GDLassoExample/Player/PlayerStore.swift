@@ -14,7 +14,7 @@ class PlayerStore: GDLassoStore<PlayerModule> {
     override func handleAction(_ internalaAction: GDLassoStore<PlayerModule>.InternalAction) {
         switch internalaAction {
         case .didCollideWithCollider(let collision):
-            GD.print(collision.getPosition())
+            GD.print("Player collided with collider at position: \(collision.getPosition())")
         }
     }
     

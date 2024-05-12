@@ -14,14 +14,16 @@ class EnvironmentStore: GDLassoStore<EnvironmentModule> {
     override func handleAction(_ internalaAction: GDLassoStore<EnvironmentModule>.InternalAction) {
         switch internalaAction {
         case .entityEnteredDangerZone(let entity):
-            update { $0.entitiesInDangerZone.append(entity) }
+            GD.print("entity entered danger zone")
+//            update { $0.entitiesInDangerZone.append(entity) }
             
         case .entityExitedDangerZone(let entity):
-            if let index = state.entitiesInDangerZone.firstIndex(of: entity) {
-                var updatedEntities = state.entitiesInDangerZone
-                updatedEntities.remove(at: index)
-                update { $0.entitiesInDangerZone = updatedEntities }
-            }
+            GD.print("entity exited danger zone")
+//            if let index = state.entitiesInDangerZone.firstIndex(of: entity) {
+//                var updatedEntities = state.entitiesInDangerZone
+//                updatedEntities.remove(at: index)
+//                update { $0.entitiesInDangerZone = updatedEntities }
+//            }
         }
     }
     

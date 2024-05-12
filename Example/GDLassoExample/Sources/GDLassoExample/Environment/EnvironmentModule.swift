@@ -12,12 +12,12 @@ import SwiftGodot
 struct EnvironmentModule: SceneModule {
     
     struct State {
-        var entitiesInDangerZone: [Object] = []
+        var entitiesInDangerZone: [Node3D] = []
     }
     
     enum InternalAction {
-        case entityEnteredDangerZone(entity: Object)
-        case entityExitedDangerZone(entity: Object)
+        case entityEnteredDangerZone(entity: Node3D)
+        case entityExitedDangerZone(entity: Node3D)
     }
     
     enum ExternalAction {

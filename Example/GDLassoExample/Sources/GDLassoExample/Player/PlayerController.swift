@@ -14,16 +14,12 @@ class PlayerController: CharacterBody3D, SceneNode {
     
     var store: PlayerModule.NodeStore?
     
-    func set(store: PlayerModule.NodeStore) {
-        self.store = store
-    }
-    
     var speed: Float = 10
     
     var targetVelocity = Vector3.zero
     
     override func _physicsProcess(delta: Double) {
-        var direction = Input.getVector(negativeX: "move_left", positiveX: "move_right", negativeY: "move_down", positiveY: "move_up")
+        var direction = Input.getVector(negativeX: "move_right", positiveX: "move_left", negativeY: "move_down", positiveY: "move_up")
         
         if direction != .zero {
             direction = direction.normalized()
@@ -40,7 +36,7 @@ class PlayerController: CharacterBody3D, SceneNode {
         }
     }
     
-    private func setUpObservations() {
+    func setUpObservations() {
         guard let store else { return }
         
         store.observeState(\.isDead) { isDead in
