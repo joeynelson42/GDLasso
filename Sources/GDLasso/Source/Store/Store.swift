@@ -70,7 +70,7 @@ open class GDLassoStore<Module: SceneModule>: ConcreteStore {
         }
     }
     
-    open func handleAction(_ internalaAction: InternalAction) {
+    open func handleAction(_ internalAction: InternalAction) {
         return lassoAbstractMethod()
     }
     

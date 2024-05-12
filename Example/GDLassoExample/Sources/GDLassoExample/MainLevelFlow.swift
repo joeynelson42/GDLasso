@@ -16,11 +16,8 @@ class MainLevelFlow: Node3D, SceneFlow {
     private var playerStore = PlayerStore(with: .init(isDead: false))
     
     override func _ready() {
-        GD.print("Main Flow ready")
-        
         if let playerController {
-            GD.print("Setting player controller store")
-            playerController.store = playerStore
+            playerController.set(store: playerStore.asNodeStore())
         }
     }
 }

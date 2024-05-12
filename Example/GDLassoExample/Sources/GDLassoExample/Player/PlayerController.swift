@@ -12,12 +12,10 @@ import GDLasso
 @Godot
 class PlayerController: CharacterBody3D, SceneNode {
     
-    typealias Store = PlayerStore
+    var store: PlayerModule.NodeStore?
     
-    var store: Store? {
-        didSet {
-            setUpObservations()
-        }
+    func set(store: PlayerModule.NodeStore) {
+        self.store = store
     }
     
     var speed: Float = 10
@@ -38,7 +36,7 @@ class PlayerController: CharacterBody3D, SceneNode {
         let collision = moveAndCollide(motion: velocity * delta)
         
         if let collision {
-            store?.dispatchAction(.didCollideWithCollider(collision))
+            dispatchAction(.didCollideWithCollider(collision))
         }
     }
     
