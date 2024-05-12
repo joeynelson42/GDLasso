@@ -37,8 +37,8 @@ extension SceneNode {
         return store?.state
     }
     
-    public func dispatchAction(_ action: NodeAction) {
-        store?.dispatchAction(action)
+    public func dispatchInternalAction(_ action: NodeAction) {
+        store?.dispatchInternalAction(action)
     }
     
 }

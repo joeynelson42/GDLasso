@@ -56,7 +56,7 @@ public protocol StateObservable: AnyObject {
 public protocol ExternalActionDispatchable: AnyObject {
     associatedtype ExternalAction
     
-    func dispatchAction(_ externalAction: ExternalAction)
+    func dispatchExternalAction(_ externalAction: ExternalAction)
 }
 
 /// These kinds of types have an `Action` type, which is
@@ -65,7 +65,7 @@ public protocol ExternalActionDispatchable: AnyObject {
 public protocol InternalActionDispatchable: AnyObject {
     associatedtype InternalAction
     
-    func dispatchAction(_ internalAction: InternalAction)
+    func dispatchInternalAction(_ internalAction: InternalAction)
 }
 
 /// These kinds of types have an `Output` type, which is

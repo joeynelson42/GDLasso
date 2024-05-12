@@ -64,7 +64,7 @@ open class GDLassoStore<Module: SceneModule>: ConcreteStore {
     }
     
     // actions
-    public func dispatchAction(_ internalAction: InternalAction) {
+    public func dispatchInternalAction(_ internalAction: InternalAction) {
         executeOnMainThread { [weak self] in
             self?.handleAction(internalAction)
         }
@@ -74,7 +74,7 @@ open class GDLassoStore<Module: SceneModule>: ConcreteStore {
         return lassoAbstractMethod()
     }
     
-    public func dispatchAction(_ externalAction: ExternalAction) {
+    public func dispatchExternalAction(_ externalAction: ExternalAction) {
         executeOnMainThread { [weak self] in
             self?.handleAction(externalAction)
         }
@@ -163,6 +163,8 @@ public class AnyStore<State, InternalAction, ExternalAction, Output>: AnyNodeSto
     }
     
     private let _observeOutput: (@escaping (Output) -> Void) -> Void
+    
+    public func dispatchExternalAction(_ externalAction: ExternalAction) {}
     
 }
 

@@ -60,11 +60,11 @@ public final class MockGDLassoStore<Module: SceneModule>: ConcreteStore {
     }
     
     // actions
-    public func dispatchAction(_ internalAction: Module.InternalAction) {
+    public func dispatchInternalAction(_ internalAction: Module.InternalAction) {
         dispatchedInternalActions.append(internalAction)
     }
     
-    public func dispatchAction(_ externalAction: Module.ExternalAction) {
+    public func dispatchExternalAction(_ externalAction: Module.ExternalAction) {
         dispatchedExternalActions.append(externalAction)
     }
     

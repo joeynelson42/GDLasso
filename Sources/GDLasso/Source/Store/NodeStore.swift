@@ -35,8 +35,8 @@ public class AnyNodeStore<NodeState, NodeAction>: AbstractNodeStore {
     ) {
         self.binder = ValueBinder<NodeState>(stateMap(store.state))
         
-        self._dispatchAction = { NodeAction in
-            store.dispatchAction(actionMap(NodeAction))
+        self._dispatchInternalAction = { NodeAction in
+            store.dispatchInternalAction(actionMap(NodeAction))
         }
         
         store.observeState { [weak self] (_, newState) in
@@ -55,7 +55,7 @@ public class AnyNodeStore<NodeState, NodeAction>: AbstractNodeStore {
     ) where NodeAction == NoAction {
         self.binder = ValueBinder<NodeState>(stateMap(store.state))
         
-        self._dispatchAction = { _ in }
+        self._dispatchInternalAction = { _ in }
         
         store.observeState { [weak self] (_, newState) in
             self?.binder.set(stateMap(newState))
@@ -67,8 +67,8 @@ public class AnyNodeStore<NodeState, NodeAction>: AbstractNodeStore {
     private var _objectWillChange: Any?
     #endif
     
-    public func dispatchAction(_ NodeAction: NodeAction) {
-        _dispatchAction(NodeAction)
+    public func dispatchInternalAction(_ NodeAction: NodeAction) {
+        _dispatchInternalAction(NodeAction)
     }
     
     public var state: NodeState {
@@ -100,7 +100,7 @@ public class AnyNodeStore<NodeState, NodeAction>: AbstractNodeStore {
     }
     
     private let binder: ValueBinder<NodeState>
-    private let _dispatchAction: (NodeAction) -> Void
+    private let _dispatchInternalAction: (NodeAction) -> Void
 }
 
 extension AnyNodeStore where NodeState: Equatable {
@@ -180,7 +180,7 @@ extension AbstractNodeStore {
     }
     
     /// Create a `NodeStore` using the Store's `State` and `Action` types,
-    /// that provides access to just the `dispatchAction` and `observeState` methods.
+    /// that provides access to just the `dispatchInternalAction` and `observeState` methods.
     ///
     /// - Returns: a new NodeStore
     public func asNodeStore() -> AnyNodeStore<State, InternalAction> {
