@@ -18,6 +18,8 @@ As an example:
 4. The `Flow` checks if it was the player, and if so it informs the `PlayerStore` that the player has taken damage from lava.
 5. The `PlayerStore` applies damage to the player by reducing the `Health` value in its `State`.
 
+See the [Example project](https://github.com/joeynelson42/GDLasso/tree/main/Example) for more details.
+
 ### Seems...overly complicated
 It can seem complicated at first, especially when compared to Godot's Signals. However, Signals are (subjectively) an anti-pattern. In small projects Signals are great, and can help things move quickly, but when projects grow in size Signals cannot be managed sanely.
 
