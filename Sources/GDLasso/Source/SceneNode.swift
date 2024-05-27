@@ -20,7 +20,7 @@ public protocol SceneNode: AnyObject {
     
     func set(store: NodeStore)
     
-    func setUpObservations()
+    func setUp(with store: NodeStore)
     
 }
 
@@ -28,10 +28,10 @@ extension SceneNode {
     
     public func set(store: NodeStore) {
         self.store = store
-        setUpObservations()
+        setUp(with: store)
     }
     
-    public func setUpObservations() {}
+    public func setUp(with store: NodeStore) {}
     
     public var state: NodeState? {
         return store?.state
