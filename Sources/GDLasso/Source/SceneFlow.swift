@@ -17,6 +17,8 @@ public protocol FlowModule {
     
     associatedtype RequiredContext: Node
     
+    static var rootNodePath: String { get }
+    
 }
 
 open class SceneFlow<Module: FlowModule> {
@@ -39,10 +41,12 @@ open class SceneFlow<Module: FlowModule> {
     }
     
     /// Creates the initial node for the Flow.
-    ///
-    /// Do not call this directly, instead use the `start` function.
-    open func createRootNode() -> Node {
-        return lassoAbstractMethod()
+    public func createRootNode() -> Node {
+        guard let packed = GD.load(path: Module.rootNodePath) as? PackedScene,
+              let rootNode = packed.instantiate() as? Node
+        else { fatalError("Failed to create Flow's root node.") }
+        
+        return rootNode
     }
     
     @discardableResult
