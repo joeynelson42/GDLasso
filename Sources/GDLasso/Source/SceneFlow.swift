@@ -29,12 +29,16 @@ open class SceneFlow<Module: FlowModule> {
     
     /// Starts the flow by creating the initial node and adding it to the tree
     public func start(with context: Node) {
-        rootNode = createRootNode()
-        context.addChild(node: rootNode)
+        let root = createRootNode()
+        rootNode = root
+        initializeRootNode(root)
+        context.addChild(node: root)
     }
     
+    open func initializeRootNode(_ root: Node) { }
+    
     /// Creates the initial node for the Flow.
-    public func createRootNode() -> Node {
+    private func createRootNode() -> Node {
         guard let packed = GD.load(path: Module.rootNodePath) as? PackedScene,
               let rootNode = packed.instantiate() as? Node
         else { fatalError("Failed to create Flow's root node.") }

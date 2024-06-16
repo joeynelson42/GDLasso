@@ -10,17 +10,21 @@ import SwiftGodot
 import GDLasso
 
 struct MainLevelFlowModule: FlowModule {
-    typealias RequiredContext = 
+
+    static var rootNodePath: String = "res://main.tscn"
+    
+}
+
+class MainLevelFlow: SceneFlow<MainLevelFlowModule> {
+    
     
     
 }
 
 @Godot
-class MainLevelFlow: Node3D {
+class MainLevel: Node3D {
     @SceneTree(path: "PlayerController") var playerController: PlayerController?
     @SceneTree(path: "EnvironmentController") var environmentController: EnvironmentController?
-    
-    let rootScenePath = "res://main.tscn"
     
     private var playerStore = PlayerStore(with: .init())
     private var environmentStore = EnvironmentStore(with: .init())
