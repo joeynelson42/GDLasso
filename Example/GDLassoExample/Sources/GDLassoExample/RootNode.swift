@@ -11,14 +11,11 @@ import SwiftGodot
 @Godot
 final class RootNode: Node {
     
-    private let mainFlowPath = "res://main.tscn"
+    private var mainFlow: MainLevelFlow?
     
     override func _ready() {
-        guard let packed = GD.load(path: mainFlowPath) as? PackedScene,
-              let mainFlow = packed.instantiate() as? Node3D
-        else { return }
+        mainFlow = MainLevelFlow()
         
-        addChild(node: mainFlow)
     }
     
 }

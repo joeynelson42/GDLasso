@@ -29,6 +29,8 @@ open class SceneFlow<Module: FlowModule> {
     
     private let outputBridge = OutputBridge<Output>()
     
+    public init() { }
+    
     /// Starts the flow by creating the initial node and adding it to the tree
     public func start(with context: Node) {
         let root = createRootNode()
