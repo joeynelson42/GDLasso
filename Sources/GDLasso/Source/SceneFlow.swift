@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftGodot
 
 /// A FlowModule describes the types that can be used in a flow.
 /// FlowModules have Output, and can specify what kind of view controller they are placed in.
@@ -14,45 +15,35 @@ public protocol FlowModule {
     
     associatedtype Output = NoOutput
     
-    associatedtype RequiredContext: AnyObject //: UIViewController = UIViewController
+    associatedtype RequiredContext: Node
     
 }
 
 open class SceneFlow<Module: FlowModule> {
     
     public private(set) weak var context: RequiredContext?
-    //    public private(set) weak var initialController: UIViewController?
+    public private(set) weak var rootNode: Node?
     
     public typealias Output = Module.Output
     public typealias RequiredContext = Module.RequiredContext
     
     private let outputBridge = OutputBridge<Output>()
     
-    /// Starts the flow
-    ///
-    /// Places the controller returned by 'createInitialController' with the provided placer.
-    /// Handles ARC considerations relative to the Flow, creating a strong reference from
-    /// the initial controller to the Flow.
-    ///
-    /// - Parameter placer: ScreenPlacer with 'placedContext' that is compatible with the Flow's 'RequiredContext'
+    /// Starts the flow by creating the initial node and adding it to the tree
     public func start(with context: RequiredContext) {
-//        lassoPrecondition(placer != nil, "\(self).start(with: placer) placer is nil!")
-//        guard let placer = placer else { return }
-//        
-//        let initialController = createInitialController()
-//        
-//        initialController.holdReference(to: self)
-//        
-//        self.context = initialController.place(with: placer)
-//        self.initialController = initialController
+        let rootNode = createRootNode()
+        self.context = context
+        self.rootNode = rootNode
+        
+        context.addChild(node: rootNode)
     }
     
-    /// Creates the initial view controller for the Flow.
+    /// Creates the initial node for the Flow.
     ///
     /// Do not call this directly, instead use the `start` function.
-//    open func createInitialController() -> UIViewController {
-//        return lassoAbstractMethod()
-//    }
+    open func createRootNode() -> Node {
+        return lassoAbstractMethod()
+    }
     
     @discardableResult
     public func observeOutput(_ handler: @escaping (Output) -> Void) -> Self {

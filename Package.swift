@@ -13,11 +13,18 @@ let package = Package(
             type: .dynamic,
             targets: ["GDLasso"]),
     ],
+    dependencies: [
+        .package(url: "https://github.com/migueldeicaza/SwiftGodot", branch: "main")
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "GDLasso"
+            name: "GDLasso",
+            dependencies: [
+                "SwiftGodot",
+            ],
+            swiftSettings: [.unsafeFlags(["-suppress-warnings"])]
         ),
         .testTarget(
             name: "GDLassoTests",
