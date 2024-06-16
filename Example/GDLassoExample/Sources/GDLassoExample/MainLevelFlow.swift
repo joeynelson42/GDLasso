@@ -17,7 +17,9 @@ struct MainLevelFlowModule: FlowModule {
 
 class MainLevelFlow: SceneFlow<MainLevelFlowModule> {
     
-    
+    override func initializeRootNode(_ root: Node) {
+        
+    }
     
 }
 

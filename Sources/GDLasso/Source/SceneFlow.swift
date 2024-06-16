@@ -15,13 +15,15 @@ public protocol FlowModule {
     
     associatedtype Output = NoOutput
     
+    associatedtype RootNode: Node
+    
     static var rootNodePath: String { get }
     
 }
 
 open class SceneFlow<Module: FlowModule> {
     
-    public private(set) weak var rootNode: Node?
+    public private(set) weak var rootNode: Module.RootNode?
     
     public typealias Output = Module.Output
     
@@ -35,12 +37,12 @@ open class SceneFlow<Module: FlowModule> {
         context.addChild(node: root)
     }
     
-    open func initializeRootNode(_ root: Node) { }
+    open func initializeRootNode(_ root: Module.RootNode) { }
     
     /// Creates the initial node for the Flow.
-    private func createRootNode() -> Node {
+    private func createRootNode() -> Module.RootNode {
         guard let packed = GD.load(path: Module.rootNodePath) as? PackedScene,
-              let rootNode = packed.instantiate() as? Node
+              let rootNode = packed.instantiate() as? Module.RootNode
         else { fatalError("Failed to create Flow's root node.") }
         
         return rootNode
