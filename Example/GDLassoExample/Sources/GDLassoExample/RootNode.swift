@@ -15,7 +15,7 @@ final class RootNode: Node {
     
     override func _ready() {
         mainFlow = MainLevelFlow()
-        
+        mainFlow?.start(with: self)
     }
     
 }

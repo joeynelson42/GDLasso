@@ -36,8 +36,7 @@ class PlayerController: CharacterBody3D, SceneNode {
         }
     }
     
-    func setUpObservations() {
-        guard let store else { return }
+    func setUp(with store: PlayerModule.NodeStore) {
         
         store.observeState(\.health) { [weak self] health in
             guard let self, let state = self.state else { return }
