@@ -15,28 +15,21 @@ public protocol FlowModule {
     
     associatedtype Output = NoOutput
     
-    associatedtype RequiredContext: Node
-    
     static var rootNodePath: String { get }
     
 }
 
 open class SceneFlow<Module: FlowModule> {
     
-    public private(set) weak var context: RequiredContext?
     public private(set) weak var rootNode: Node?
     
     public typealias Output = Module.Output
-    public typealias RequiredContext = Module.RequiredContext
     
     private let outputBridge = OutputBridge<Output>()
     
     /// Starts the flow by creating the initial node and adding it to the tree
-    public func start(with context: RequiredContext) {
-        let rootNode = createRootNode()
-        self.context = context
-        self.rootNode = rootNode
-        
+    public func start(with context: Node) {
+        rootNode = createRootNode()
         context.addChild(node: rootNode)
     }
     

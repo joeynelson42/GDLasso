@@ -9,6 +9,12 @@ import Foundation
 import SwiftGodot
 import GDLasso
 
+struct MainLevelFlowModule: FlowModule {
+    typealias RequiredContext = 
+    
+    
+}
+
 @Godot
 class MainLevelFlow: Node3D {
     @SceneTree(path: "PlayerController") var playerController: PlayerController?
