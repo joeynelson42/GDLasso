@@ -35,7 +35,7 @@ size = Vector3(2, 2.75, 10)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t4yr0"]
 
-[node name="MainLevelFlow" type="MainLevelFlow"]
+[node name="MainLevelFlow" type="MainLevel"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-1, 4.37114e-08, -7.57103e-08, 3.02058e-16, 0.866025, 0.5, 8.74228e-08, 0.5, -0.866025, 2.08165e-12, 8.1685, -12.8784)

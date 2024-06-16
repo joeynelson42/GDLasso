@@ -17,7 +17,7 @@ class EnvironmentController: Node3D, SceneNode {
     
     var store: EnvironmentModule.NodeStore?
     
-    func setUpObservations() {
+    func setUp(with store: EnvironmentModule.NodeStore) {
         initializeAreaMonitoring()
     }
     

@@ -9,29 +9,32 @@ import Foundation
 import SwiftGodot
 import GDLasso
 
-@Godot
-class MainLevelFlow: Node3D, SceneFlow {
-    @SceneTree(path: "PlayerController") var playerController: PlayerController?
-    @SceneTree(path: "EnvironmentController") var environmentController: EnvironmentController?
+struct MainLevelFlowModule: FlowModule {
+
+    typealias RootNode = MainLevel
+    
+    static var rootNodePath: String = "res://main.tscn"
+    
+}
+
+class MainLevelFlow: SceneFlow<MainLevelFlowModule> {
     
     private var playerStore = PlayerStore(with: .init())
     private var environmentStore = EnvironmentStore(with: .init())
     
-    override func _ready() {
-        if var playerController {
-            playerController.set(store: playerStore.asNodeStore())
-        }
+    override func initializeRootNode(_ root: MainLevel) {
+        // Setup environmentController
+        root.environmentController?.set(store: environmentStore.asNodeStore())
+        environmentStore.observeOutput(handleEnvironmentOutput(_:))
         
-        if var environmentController {
-            environmentController.set(store: environmentStore.asNodeStore())
-            environmentStore.observeOutput(handleEnvironmentOutput(_:))
-        }
+        // Setup playerController
+        root.playerController?.set(store: playerStore.asNodeStore())
     }
     
     private func handleEnvironmentOutput(_ output: GDLassoStore<EnvironmentModule>.Output) {
         switch output {
         case .damageCausedToEntity(let entity, let damage):
-            if let playerController, playerController == entity {
+            if let controller = rootNode?.playerController, controller == entity {
                 playerStore.dispatchExternalAction(.damageCausedToPlayer(amount: damage))
             }
         }

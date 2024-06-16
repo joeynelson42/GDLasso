@@ -1,15 +1,6 @@
 {
   "pins" : [
     {
-      "identity" : "gdlasso",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/joeynelson42/GDLasso",
-      "state" : {
-        "branch" : "origin/swiftGodot",
-        "revision" : "a70ef6b1c35196d42c9c770e5edd1db4af66748d"
-      }
-    },
-    {
       "identity" : "swift-syntax",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-syntax",
@@ -24,7 +15,7 @@
       "location" : "https://github.com/migueldeicaza/SwiftGodot",
       "state" : {
         "branch" : "main",
-        "revision" : "53f00035a850fbb1041ae93c465a72f14aad6e84"
+        "revision" : "fe24cb01640c2d4d48c8555a71adfe346d9543cf"
       }
     }
   ],
