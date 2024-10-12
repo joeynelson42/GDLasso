@@ -14,7 +14,7 @@ let package = Package(
             targets: ["GDLasso"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/migueldeicaza/SwiftGodot", revision: "0.45")
+        .package(url: "https://github.com/migueldeicaza/SwiftGodot", branch: "main")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
