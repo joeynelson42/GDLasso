@@ -3,7 +3,7 @@
     {
       "identity" : "swift-syntax",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-syntax",
+      "location" : "https://github.com/swiftlang/swift-syntax",
       "state" : {
         "revision" : "303e5c5c36d6a558407d364878df131c3546fad8",
         "version" : "510.0.2"
@@ -15,7 +15,7 @@
       "location" : "https://github.com/migueldeicaza/SwiftGodot",
       "state" : {
         "branch" : "main",
-        "revision" : "fe24cb01640c2d4d48c8555a71adfe346d9543cf"
+        "revision" : "d2feb8812e60d1de98ad55f4649e2c9db89d0263"
       }
     }
   ],
