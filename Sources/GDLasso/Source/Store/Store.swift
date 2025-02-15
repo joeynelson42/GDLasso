@@ -65,7 +65,7 @@ open class GDLassoStore<Module: SceneModule>: ConcreteStore {
     
     // actions
     public func dispatchInternalAction(_ internalAction: InternalAction) {
-        executeOnMainThread { [weak self] in
+        DispatchQueue.main.async { [weak self] in
             self?.handleAction(internalAction)
         }
     }
@@ -75,7 +75,7 @@ open class GDLassoStore<Module: SceneModule>: ConcreteStore {
     }
     
     public func dispatchExternalAction(_ externalAction: ExternalAction) {
-        executeOnMainThread { [weak self] in
+        DispatchQueue.main.async { [weak self] in
             self?.handleAction(externalAction)
         }
     }

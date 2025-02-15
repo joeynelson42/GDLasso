@@ -46,7 +46,7 @@ class ValueBinder<Value> {
             self._value = newValue
             handlers = self.observers
         }
-        executeOnMainThread {
+        DispatchQueue.main.async { [weak self] in
             // Dispatch to all observers which exist at execution time - it is possible that additional
             // observers could be added b/w queuing and execution.
             handlers.forEach({ $0(oldValue, newValue) })
@@ -59,7 +59,7 @@ class ValueBinder<Value> {
             value = self._value
             observers.append(handler)
         }
-        executeOnMainThread {
+        DispatchQueue.main.async { [weak self] in
             handler(nil, value)
         }
     }
@@ -82,17 +82,6 @@ class ValueBinder<Value> {
             let newKeyValue = newValue[keyPath: keyPath]
             guard oldKeyValue != newKeyValue else { return }
             handler(oldKeyValue, newKeyValue)
-        }
-    }
-    
-    func executeOnMainThread(_ toExecute: @escaping () -> Void) {
-        if Thread.isMainThread {
-            toExecute()
-        }
-        else {
-            DispatchQueue.main.async {
-                toExecute()
-            }
         }
     }
 }

@@ -22,7 +22,7 @@ internal final class OutputBridge<Output> {
     }
     
     internal func dispatch(_ output: Output) {
-        executeOnMainThread { [weak self] in
+        DispatchQueue.main.async { [weak self] in
             self?.outputObservers.forEach { $0(output) }
         }
     }

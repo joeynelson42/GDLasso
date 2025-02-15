@@ -94,14 +94,3 @@ internal func lassoPrecondition(_ condition: @autoclosure () -> Bool, _ message:
 private func lassoPreconditionFailure(_ message: String) {
     print(message)
 }
-
-public func executeOnMainThread(_ toExecute: @escaping () -> Void) {
-    if Thread.isMainThread {
-        toExecute()
-    }
-    else {
-        DispatchQueue.main.async {
-            toExecute()
-        }
-    }
-}
