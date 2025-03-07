@@ -21,15 +21,11 @@ open class SceneFlow<Module: FlowModule, RootNode: Node> {
     
     public private(set) weak var rootNode: RootNode?
     
-    var rootNodePath: String
+    var rootNodePath: String = ""
     
     public typealias Output = Module.Output
     
     private let outputBridge = OutputBridge<Output>()
-    
-    public init(rootNodePath: String) {
-        self.rootNodePath = rootNodePath
-    }
     
     /// Starts the flow by creating the initial node and adding it to the tree
     public func start(with context: Node) {
