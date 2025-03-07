@@ -21,7 +21,7 @@ open class SceneFlow<Module: FlowModule, RootNode: Node> {
     
     public private(set) weak var rootNode: RootNode?
     
-    var rootNodePath: String = ""
+    public var rootNodePath: String { "" }
     
     public typealias Output = Module.Output
     
