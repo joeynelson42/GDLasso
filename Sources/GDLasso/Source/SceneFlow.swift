@@ -17,9 +17,9 @@ public protocol FlowModule {
     
 }
 
-open class SceneFlow<Module: FlowModule, RootNode: Node> {
+open class SceneFlow<Module: FlowModule> {
     
-    public private(set) weak var rootNode: RootNode?
+    public private(set) weak var rootNode: Node?
     
     public var rootNodePath: String { "" }
     
@@ -37,12 +37,12 @@ open class SceneFlow<Module: FlowModule, RootNode: Node> {
         context.addChild(node: root)
     }
     
-    open func initializeRootNode(_ root: RootNode) { }
+    open func initializeRootNode(_ root: Node) { }
     
     /// Creates the initial node for the Flow.
-    private func createRootNode() -> RootNode {
+    private func createRootNode() -> Node {
         guard let packed = GD.load(path: rootNodePath) as? PackedScene,
-              let rootNode = packed.instantiate() as? RootNode
+              let rootNode = packed.instantiate() as? Node
         else { fatalError("Failed to create Flow's root node.") }
         
         return rootNode
