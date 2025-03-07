@@ -15,21 +15,21 @@ public protocol FlowModule {
     
     associatedtype Output = NoOutput
     
-    associatedtype RootNode: Node
-    
-    static var rootNodePath: String { get }
-    
 }
 
-open class SceneFlow<Module: FlowModule> {
+open class SceneFlow<Module: FlowModule, RootNode: Node> {
     
-    public private(set) weak var rootNode: Module.RootNode?
+    public private(set) weak var rootNode: RootNode?
+    
+    var rootNodePath: String
     
     public typealias Output = Module.Output
     
     private let outputBridge = OutputBridge<Output>()
     
-    public init() { }
+    public init(rootNodePath: String) {
+        self.rootNodePath = rootNodePath
+    }
     
     /// Starts the flow by creating the initial node and adding it to the tree
     public func start(with context: Node) {
@@ -39,12 +39,12 @@ open class SceneFlow<Module: FlowModule> {
         context.addChild(node: root)
     }
     
-    open func initializeRootNode(_ root: Module.RootNode) { }
+    open func initializeRootNode(_ root: RootNode) { }
     
     /// Creates the initial node for the Flow.
-    private func createRootNode() -> Module.RootNode {
-        guard let packed = GD.load(path: Module.rootNodePath) as? PackedScene,
-              let rootNode = packed.instantiate() as? Module.RootNode
+    private func createRootNode() -> RootNode {
+        guard let packed = GD.load(path: rootNodePath) as? PackedScene,
+              let rootNode = packed.instantiate() as? RootNode
         else { fatalError("Failed to create Flow's root node.") }
         
         return rootNode
